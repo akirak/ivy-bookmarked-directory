@@ -41,7 +41,6 @@
          (i (length parent)))
     (substring (expand-file-name "b" parent) i (1+ i))))
 
-;; FIXME: Add support for Windows and DOS
 (defconst ivy-bookmarked-directory-separator
   (ivy-bookmarked-directory--path-separator))
 
