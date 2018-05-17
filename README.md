@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/akirak/ivy-bookmarked-directory.svg?branch=master)](https://travis-ci.org/akirak/ivy-bookmarked-directory)
+
 # ivy-bookmarked-directory
 
 This is an [Ivy](https://github.com/abo-abo/swiper) interface which displays a list of bookmarked directories.
