@@ -4,7 +4,7 @@
 
 ;; Author: Akira Komamura <akira.komamura@gmail.com>
 ;; Version: 0.1.0
-;; Package-Requires: ((emacs "24.1") (ivy "0.10"))
+;; Package-Requires: ((emacs "24.4") (ivy "0.10"))
 ;; URL: https://github.com/akirak/ivy-bookmarked-directory
 
 ;; This file is not part of GNU Emacs.
@@ -35,10 +35,18 @@
 (require 'cl-lib)
 (require 'bookmark)
 
+(defun ivy-bookmarked-directory--path-separator ()
+  "Get the path separator for the current system."
+  (let* ((parent (expand-file-name "a"))
+         (i (length parent)))
+    (substring (expand-file-name "b" parent) i (1+ i))))
+
 ;; FIXME: Add support for Windows and DOS
-(defvar ivy-bookmarked-directory-separator "/")
+(defconst ivy-bookmarked-directory-separator
+  (ivy-bookmarked-directory--path-separator))
 
 (defun ivy-bookmarked-directory--candidates ()
+  "Get a list of bookmarked directories sorted by file path."
   (bookmark-maybe-load-default-file)
   (cl-loop for record in bookmark-alist
            with result = nil
@@ -49,6 +57,7 @@
 
 ;;;###autoload
 (defun ivy-bookmarked-directory ()
+  "Ivy interface for bookmarked directories."
   (interactive)
   (ivy-read "Bookmarked directory: "
             (ivy-bookmarked-directory--candidates)

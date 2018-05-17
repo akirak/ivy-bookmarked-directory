@@ -2,10 +2,10 @@
 
 This is an [Ivy](https://github.com/abo-abo/swiper) interface which displays a list of bookmarked directories.
 
-There is `counsel-bookmark` command included in the counsel package, but `ivy-bookmarked-directory` is different in the following aspects:
+Counsel package includes `counsel-bookmark`, but `ivy-bookmarked-directory` is different from that in the following aspects:
 
 - It displays only directory bookmarks.
-- It displays bookmarked directories rather than bookmark names in the list.
+- It displays file paths rather than bookmark names.
 - It cannot add/edit/delete a bookmark.
 
 ## Configuration
