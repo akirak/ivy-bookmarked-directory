@@ -48,12 +48,11 @@
 (defun ivy-bookmarked-directory--candidates ()
   "Get a list of bookmarked directories sorted by file path."
   (bookmark-maybe-load-default-file)
-  (cl-loop for record in bookmark-alist
-           with result = nil
-           for filename = (bookmark-get-filename record)
-           when (string-suffix-p ivy-bookmarked-directory-separator filename)
-           collect filename into result
-           finally return (cl-sort result #'string<)))
+  (cl-sort (cl-remove-if-not
+            (lambda (filename)
+              (string-suffix-p ivy-bookmarked-directory-separator filename))
+            (mapcar #'bookmark-get-filename bookmark-alist))
+           #'string<))
 
 ;;;###autoload
 (defun ivy-bookmarked-directory ()
