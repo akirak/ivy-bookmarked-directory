@@ -29,6 +29,8 @@ For example, the following snippets adds an action to open a selected directory 
 
 Use `ivy-bookmarked-directory`.
 
+With a prefix prefix (`C-u`), you can add a bookmark which points to the current directory (`default-directory`). There is also another command `ivy-bookmarked-directory-add` which you can use to create a directory bookmark.
+
 ## License
 
 GPL v3
