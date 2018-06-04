@@ -35,6 +35,11 @@
 (require 'cl-lib)
 (require 'bookmark)
 
+(defcustom ivy-bookmarked-directory-default-name "%s"
+  "Default bookmark name created by `ivy-bookmarked-directory-add."
+  :group 'ivy-bookmarked-directory
+  :type 'string)
+
 (defun ivy-bookmarked-directory--path-separator ()
   "Get the path separator for the current system."
   (let* ((parent (expand-file-name "a"))
@@ -54,13 +59,33 @@
            #'string<))
 
 ;;;###autoload
+(defun ivy-bookmarked-directory-add (dir name)
+  "Add the current default directory to bookmarks."
+  (interactive (list default-directory
+                     (let ((path (abbreviate-file-name default-directory)))
+                       (read-from-minibuffer (format "Name of the new bookmark to %s: "
+                                                     path)
+                                             (format ivy-bookmarked-directory-default-name
+                                                     path)))))
+  (let* ((record `((filename . ,(abbreviate-file-name (file-name-as-directory (expand-file-name dir))))
+                   (front-context-string)
+                   (rear-context-string))))
+    (bookmark-maybe-load-default-file)
+    (bookmark-store name record nil)))
+
+;;;###autoload
 (defun ivy-bookmarked-directory ()
-  "Ivy interface for bookmarked directories."
+  "Ivy interface for bookmarked directories.
+
+With a prefix argument, this command creates a new bookmark which points to the
+current value of `default-directory'."
   (interactive)
-  (ivy-read "Bookmarked directory: "
-            (ivy-bookmarked-directory--candidates)
-            :caller 'ivy-bookmarked-directory
-            :action 'dired))
+  (if current-prefix-arg
+      (call-interactively 'ivy-bookmarked-directory-add)
+    (ivy-read "Bookmarked directory: "
+              (ivy-bookmarked-directory--candidates)
+              :caller 'ivy-bookmarked-directory
+              :action 'dired)))
 
 (ivy-set-actions 'ivy-bookmarked-directory
                  '(("j" dired-other-window "dired-other-window")
