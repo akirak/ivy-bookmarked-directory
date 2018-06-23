@@ -60,7 +60,7 @@
 
 ;;;###autoload
 (defun ivy-bookmarked-directory-add (dir name)
-  "Add the current default directory to bookmarks."
+  "Add a bookmark to DIR with NAME."
   (interactive (list default-directory
                      (let ((path (abbreviate-file-name default-directory)))
                        (read-from-minibuffer (format "Name of the new bookmark to %s: "
