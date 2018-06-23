@@ -5,6 +5,7 @@
 ;; Author: Akira Komamura <akira.komamura@gmail.com>
 ;; Version: 0.1.0
 ;; Package-Requires: ((emacs "24.4") (ivy "0.10"))
+;; Keywords: files
 ;; URL: https://github.com/akirak/ivy-bookmarked-directory
 
 ;; This file is not part of GNU Emacs.
