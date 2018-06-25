@@ -16,7 +16,7 @@ Counsel package includes `counsel-bookmark`, but `ivy-bookmarked-directory` is d
 
 As `ivy-bookmarked-directory` is based on Ivy, you can [customize](http://oremacs.com/swiper/#customization) it.
 
-For example, the following snippets adds an action to open a selected directory using `multi-term`:
+For example, the following snippet adds an action to open a selected directory using `multi-term`:
 
 ``` emacs-lisp
 (ivy-add-actions 'ivy-bookmarked-directory
